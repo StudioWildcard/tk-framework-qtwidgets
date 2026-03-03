@@ -12,8 +12,7 @@ from datetime import datetime
 import os
 import sys
 
-import mock
-from mock import Mock, patch
+from unittest.mock import Mock, patch
 import pytest
 
 import sgtk
@@ -48,7 +47,7 @@ class TestFiltersDefinition(TankTestBase):
         Start the test engine, import the necessary frameworks for testing, and initialize some basic model data.
         """
 
-        super(TestFiltersDefinition, self).setUp()
+        super().setUp()
         self.setup_fixtures()
         context = sgtk.Context(self.tk, project=self.project)
         self.engine = sgtk.platform.start_engine("tk-testengine", self.tk, context)
@@ -198,7 +197,7 @@ class TestFiltersDefinition(TankTestBase):
         )
         self.shotgun_globals.get_data_type = self.shotgun_globals_get_data_type
 
-        super(TestFiltersDefinition, self).tearDown()
+        super().tearDown()
 
     def test_definitioninition_constructor(self):
         """

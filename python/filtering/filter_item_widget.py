@@ -11,11 +11,6 @@
 import sgtk
 from sgtk.platform.qt import QtCore, QtGui
 
-try:
-    from tank_vendor import sgutils
-except ImportError:
-    from tank_vendor import six as sgutils
-
 search_widget = sgtk.platform.current_bundle().import_module("search_widget")
 shotgun_search_widget = sgtk.platform.current_bundle().import_module(
     "shotgun_search_widget"
@@ -51,7 +46,7 @@ class FilterItemWidget(QtGui.QWidget):
         :type filter_data: dict
         """
 
-        super(FilterItemWidget, self).__init__(parent)
+        super().__init__(parent)
 
         self._id = filter_id
         self._group_id = group_id
@@ -169,7 +164,7 @@ class ChoicesFilterItemWidget(FilterItemWidget):
         :type bg_task_manager: :class:`~task_manager.BackgroundTaskManager`
         """
 
-        super(ChoicesFilterItemWidget, self).__init__(
+        super().__init__(
             filter_id,
             group_id,
             parent=parent,
@@ -221,7 +216,7 @@ class ChoicesFilterItemWidget(FilterItemWidget):
         Highlight the background color on mouse hover.
         """
 
-        super(ChoicesFilterItemWidget, self).paintEvent(event)
+        super().paintEvent(event)
 
         option = QtGui.QStyleOption()
         option.initFrom(self)
@@ -331,7 +326,7 @@ class SearchFilterItemWidget(FilterItemWidget):
         :type bg_task_manager: :class:`~task_manager.BackgroundTaskManager`
         """
 
-        super(SearchFilterItemWidget, self).__init__(
+        super().__init__(
             filter_id,
             group_id,
             parent=parent,

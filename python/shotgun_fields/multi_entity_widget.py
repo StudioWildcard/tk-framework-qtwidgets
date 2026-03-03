@@ -10,13 +10,11 @@
 
 import sgtk
 from sgtk.platform.qt import QtGui, QtCore
-from tank_vendor import six
 
 from .bubble_widget import BubbleEditWidget, BubbleWidget
 from .entity_widget import EntityWidget
 from .shotgun_field_meta import ShotgunFieldMeta
 from .util import check_project_search_supported
-
 
 shotgun_globals = sgtk.platform.import_framework(
     "tk-framework-shotgunutils", "shotgun_globals"
@@ -44,8 +42,7 @@ class MultiEntityWidget(EntityWidget):
         return ", ".join([self._entity_dict_to_html(entity) for entity in value])
 
 
-@six.add_metaclass(ShotgunFieldMeta)
-class MultiEntityEditorWidget(BubbleEditWidget):
+class MultiEntityEditorWidget(BubbleEditWidget, metaclass=ShotgunFieldMeta):
     """
     Allows editing of a ``multi_entity`` field value as returned by the Shotgun API.
     """
@@ -119,7 +116,7 @@ class MultiEntityEditorWidget(BubbleEditWidget):
 
         if not self._completer.popup().isVisible():
             self._show_completer()
-        super(MultiEntityEditorWidget, self).focusInEvent(event)
+        super().focusInEvent(event)
 
     def get_value(self):
         """
@@ -138,7 +135,7 @@ class MultiEntityEditorWidget(BubbleEditWidget):
         :type event: :class:`~PySide.QtGui.QEvent`
         """
         self._hide_completer()
-        super(MultiEntityEditorWidget, self).hideEvent(event)
+        super().hideEvent(event)
 
     def keyPressEvent(self, event):
         """
@@ -174,7 +171,7 @@ class MultiEntityEditorWidget(BubbleEditWidget):
             event.ignore()
             return
 
-        super(MultiEntityEditorWidget, self).keyPressEvent(event)
+        super().keyPressEvent(event)
 
     def setup_widget(self):
         """

@@ -8,8 +8,6 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-from __future__ import with_statement
-
 import sgtk
 from sgtk.platform.qt import QtCore, QtGui
 from .ui.card_widget import Ui_ShotgunEntityCardWidget
@@ -36,7 +34,7 @@ class ShotgunEntityCardWidget(QtGui.QWidget):
                                       the widget will not construct field widgets until one
                                       is set later via the field_manager property.
         """
-        super(ShotgunEntityCardWidget, self).__init__(parent)
+        super().__init__(parent)
 
         self.ui = Ui_ShotgunEntityCardWidget()
         self.ui.setupUi(self)
@@ -256,26 +254,21 @@ class ShotgunEntityCardWidget(QtGui.QWidget):
                 highlight_col.blue(),
             )
 
-            self.ui.box.setStyleSheet(
-                """
+            self.ui.box.setStyleSheet("""
                 #box {
                     border: 1px solid %s;
                     margin-bottom: 2px;
                     margin-right: 2px;
                 }
-                """
-                % (highlight_str)
-            )
+                """ % (highlight_str))
         elif self._show_border:
-            self.ui.box.setStyleSheet(
-                """
+            self.ui.box.setStyleSheet("""
                 #box {
                     border: 1px solid rgb(50,50,50);
                     margin-bottom: 2px;
                     margin-right: 2px;
                 }
-                """
-            )
+                """)
         else:
             self.ui.box.setStyleSheet("")
 
@@ -559,7 +552,7 @@ class _OrderedDict(object):
         self._keys = []
         self._dict = dict()
 
-        for (key, value) in kwargs.items():
+        for key, value in kwargs.items():
             self.__setitem__(key, value)
 
     def get(self, key, default=None):

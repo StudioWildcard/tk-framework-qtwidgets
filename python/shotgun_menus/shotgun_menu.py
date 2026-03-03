@@ -47,7 +47,7 @@ class ShotgunMenu(QtGui.QMenu):
         :type parent: :class:`~PySide.QtGui.QWidget`
         """
 
-        super(ShotgunMenu, self).__init__(parent)
+        super().__init__(parent)
 
         self._typed_text = ""
 
@@ -60,8 +60,7 @@ class ShotgunMenu(QtGui.QMenu):
         self._type_timer.timeout.connect(self._on_type_timer_timeout)
 
         # styling to resemble PTR web menus
-        self.setStyleSheet(
-            """
+        self.setStyleSheet("""
             QMenu {
                 /*
                  * Ensure the menu only takes up one column and scrolls rather
@@ -100,8 +99,7 @@ class ShotgunMenu(QtGui.QMenu):
             QMenu::indicator:checked {
                 image: url(:tk_framework_qtwidgets.shotgun_menus/check.png);
             }
-            """
-        )
+            """)
 
     @staticmethod
     def get_label(title):
@@ -200,7 +198,7 @@ class ShotgunMenu(QtGui.QMenu):
         else:
             # the typed key isn't one we recognize for matching. call the
             # default implementation
-            super(ShotgunMenu, self).keyReleaseEvent(event)
+            super().keyReleaseEvent(event)
             self._type_timer.start()
             return
 
@@ -221,7 +219,7 @@ class ShotgunMenu(QtGui.QMenu):
                 pass
 
         # didn't find a match, call the base class
-        super(ShotgunMenu, self).keyReleaseEvent(event)
+        super().keyReleaseEvent(event)
 
         # ensure the timer is started
         self._type_timer.start()

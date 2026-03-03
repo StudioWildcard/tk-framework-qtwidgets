@@ -10,11 +10,6 @@
 
 import sgtk
 
-try:
-    from tank_vendor import sgutils
-except ImportError:
-    from tank_vendor import six as sgutils
-
 # import the shotgun_model and view modules from the shotgun utils framework
 shotgun_model = sgtk.platform.import_framework(
     "tk-framework-shotgunutils", "shotgun_model"
@@ -40,10 +35,10 @@ class SearchResultDelegate(views.WidgetDelegate):
         """
         :param view: The view where this delegate is being used
         """
-        super(SearchResultDelegate, self).__init__(view)
+        super().__init__(view)
 
         self._pixmaps = CompleterPixmaps()
-        self._text = sgutils.ensure_str(text)
+        self._text = text
 
         self.selection_model = view.selectionModel()
 

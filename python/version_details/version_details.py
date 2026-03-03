@@ -99,7 +99,7 @@ class VersionDetailsWidget(QtGui.QWidget):
         :param bg_task_manager: A :class:`~BackgroundTaskManager` object.
         :param entity:          A Shotgun Version entity dictionary.
         """
-        super(VersionDetailsWidget, self).__init__(parent)
+        super().__init__(parent)
 
         self._current_entity = None
         self._pinned = False
@@ -1301,9 +1301,9 @@ class VersionDetailsWidget(QtGui.QWidget):
         # then we know we want to get the data type of the "code" field on the
         # "Sequence" entity type.
         if "." in field:
-            (entity_type, field_name) = field.split(".")[-2:]
+            entity_type, field_name = field.split(".")[-2:]
         else:
-            (entity_type, field_name) = ("Version", field)
+            entity_type, field_name = ("Version", field)
 
         # make sure the field is visible
         if not shotgun_globals.field_is_visible(

@@ -49,7 +49,7 @@ class SearchCompleter(QtGui.QCompleter):
 
     # different items in the auto complete list can have
     # a different meaning, so track those here too
-    (MODE_LOADING, MODE_NOT_FOUND, MODE_RESULT, MODE_NOT_ENOUGH_TEXT) = range(4)
+    MODE_LOADING, MODE_NOT_FOUND, MODE_RESULT, MODE_NOT_ENOUGH_TEXT = range(4)
 
     def __init__(self, parent=None):
         """
@@ -57,7 +57,7 @@ class SearchCompleter(QtGui.QCompleter):
         :type parent: :class:`~PySide.QtGui.QWidget`
         """
 
-        super(SearchCompleter, self).__init__(parent)
+        super().__init__(parent)
 
         self._pixmaps = CompleterPixmaps()
 

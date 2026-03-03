@@ -19,11 +19,6 @@ import sys
 import os
 import time
 
-try:
-    from tank_vendor import sgutils
-except ImportError:
-    from tank_vendor import six as sgutils
-
 shotgun_model = sgtk.platform.import_framework(
     "tk-framework-shotgunutils", "shotgun_model"
 )
@@ -563,8 +558,7 @@ class ActivityStreamDataHandler(QtCore.QObject):
                 self._bundle.log_debug("Creating schema in sqlite db.")
 
                 # we have a brand new database. Create all tables and indices
-                c.executescript(
-                    """
+                c.executescript("""
                     CREATE TABLE entity (entity_type text, entity_id integer, activity_id integer, created_at datetime);
 
                     CREATE TABLE activity (activity_id integer, note_id integer default null, payload blob, created_at datetime);
@@ -578,8 +572,7 @@ class ActivityStreamDataHandler(QtCore.QObject):
                     CREATE INDEX activity_2 ON activity(activity_id, note_id);
 
                     CREATE INDEX note_1 ON activity(note_id);
-                    """
-                )
+                    """)
                 connection.commit()
         except:
             connection.close()
@@ -722,7 +715,9 @@ class ActivityStreamDataHandler(QtCore.QObject):
             for event in events:
                 activity_id = event["id"]
                 payload = sgtk.util.pickle.dumps(event)
-                blob = sqlite3.Binary(sgutils.ensure_binary(payload))
+                if isinstance(payload, str):
+                    payload = payload.encode("utf-8")
+                blob = sqlite3.Binary(payload)
 
                 # first insert event
                 if self._force_activity_stream_update:
@@ -797,7 +792,9 @@ class ActivityStreamDataHandler(QtCore.QObject):
 
             # first pickle the note data
             payload = sgtk.util.pickle.dumps(data)
-            blob = sqlite3.Binary(sgutils.ensure_binary(payload))
+            if isinstance(payload, str):
+                payload = payload.encode("utf-8")
+            blob = sqlite3.Binary(payload)
 
             # first delete any existing record
             cursor.execute("DELETE FROM note where note_id = ?", (note_id,))
@@ -952,7 +949,7 @@ class ActivityStreamDataHandler(QtCore.QObject):
 
         elif isinstance(data, dict):
             new_val = {}
-            for (k, v) in data.items():
+            for k, v in data.items():
                 new_val[k] = self.__convert_timestamp_r(v)
             return new_val
 

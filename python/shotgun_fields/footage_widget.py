@@ -14,11 +14,9 @@ from .label_base_widget import LabelBaseWidget
 from .shotgun_field_meta import ShotgunFieldMeta
 
 from sgtk.platform.qt import QtCore, QtGui
-from tank_vendor import six
 
 
-@six.add_metaclass(ShotgunFieldMeta)
-class FootageWidget(LabelBaseWidget):
+class FootageWidget(LabelBaseWidget, metaclass=ShotgunFieldMeta):
     """
     Display a ``footage`` field value as returned by the Shotgun API.
     """
@@ -26,8 +24,7 @@ class FootageWidget(LabelBaseWidget):
     _DISPLAY_TYPE = "footage"
 
 
-@six.add_metaclass(ShotgunFieldMeta)
-class FootageEditorWidget(QtGui.QLineEdit):
+class FootageEditorWidget(QtGui.QLineEdit, metaclass=ShotgunFieldMeta):
     """
     Allows editing of a ``footage`` field value as returned by the Shotgun API.
 
@@ -53,7 +50,7 @@ class FootageEditorWidget(QtGui.QLineEdit):
         if event.key() in [QtCore.Qt.Key_Enter, QtCore.Qt.Key_Return]:
             self.value_changed.emit()
         else:
-            super(FootageEditorWidget, self).keyPressEvent(event)
+            super().keyPressEvent(event)
 
     def setup_widget(self):
         """
@@ -112,7 +109,7 @@ class _FootageInputValidator(QtGui.QValidator):
         """
         try:
             # translate the input into feet & frames
-            (feet, frames) = self._get_feet_frames(input_str)
+            feet, frames = self._get_feet_frames(input_str)
             input_str = "%d-%02d" % (feet, frames)
         except ValueError:
             pass
@@ -131,7 +128,7 @@ class _FootageInputValidator(QtGui.QValidator):
         :rtype: int
         """
         try:
-            (feet, frames) = self._get_feet_frames(input_str)
+            feet, frames = self._get_feet_frames(input_str)
         except ValueError:
             return QtGui.QValidator.Invalid
 
@@ -164,7 +161,7 @@ class _FootageInputValidator(QtGui.QValidator):
             # frames value is reduced, then compute the total feet and frames.
             feet = match.group(1)
             frames = match.group(2)
-            (extra_feet, frames) = divmod(int(frames), 16)
+            extra_feet, frames = divmod(int(frames), 16)
             return (int(feet) + extra_feet, frames)
 
         raise ValueError

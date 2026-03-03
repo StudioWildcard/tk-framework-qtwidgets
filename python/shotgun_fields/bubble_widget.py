@@ -10,7 +10,6 @@
 
 import sgtk
 from sgtk.platform.qt import QtCore, QtGui
-from tank_vendor.six import unichr
 
 
 class BubbleWidget(QtGui.QFrame):
@@ -35,7 +34,7 @@ class BubbleWidget(QtGui.QFrame):
         :param parent: This widget's parent widget
         :type parent: :class:`~PySide.QtGui.QWidget`
         """
-        super(BubbleWidget, self).__init__(parent)
+        super().__init__(parent)
 
         # placeholder for the underlying data this widget represents in the editor
         self._data = None
@@ -45,16 +44,13 @@ class BubbleWidget(QtGui.QFrame):
 
         # style the look of the bubble
         self.setObjectName("bubble")
-        self.setStyleSheet(
-            """
+        self.setStyleSheet("""
             #bubble {
                 border: 1px solid black;
                 border-radius: 5px;
                 background-color: %s;
             }
-            """
-            % self.palette().color(QtGui.QPalette.Button).name()
-        )
+            """ % self.palette().color(QtGui.QPalette.Button).name())
 
         # create a remove button for the widget.
         # extract a close button icon from the style and use it
@@ -149,7 +145,7 @@ class BubbleEditWidget(QtGui.QTextEdit):
     """
 
     # used as a placeholder for a bubble in the editor
-    _OBJECT_REPLACEMENT_CHAR = unichr(0xFFFC)
+    _OBJECT_REPLACEMENT_CHAR = chr(0xFFFC)
 
     def __init__(self, parent=None):
         """
@@ -159,7 +155,7 @@ class BubbleEditWidget(QtGui.QTextEdit):
         :type parent: :class:`~PySide.QtGui.QWidget`
         """
 
-        super(BubbleEditWidget, self).__init__(parent)
+        super().__init__(parent)
 
         self._char_formats = {}
 
@@ -212,7 +208,7 @@ class BubbleEditWidget(QtGui.QTextEdit):
         for char_format in self._char_formats.values():
             del char_format
         self._bubble_text_object.clear()
-        super(BubbleEditWidget, self).clear()
+        super().clear()
 
     def clear_typed_text(self):
         """
@@ -422,7 +418,7 @@ class _BubbleTextObject(QtGui.QPyTextObject):
         :type parent: :class:`~PySide.QtGui.QObject`
         :return:
         """
-        super(_BubbleTextObject, self).__init__(parent)
+        super().__init__(parent)
 
         # lookup of bubble widgets by id
         self._bubbles = {}

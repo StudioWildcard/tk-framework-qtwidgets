@@ -14,11 +14,6 @@ import sgtk
 from sgtk.platform.qt import QtCore, QtGui
 from tank.util import sgre as re
 
-try:
-    from tank_vendor import sgutils
-except ImportError:
-    from tank_vendor import six as sgutils
-
 utils = sgtk.platform.current_bundle().import_module("utils")
 
 DEBUG_PAINT = False
@@ -107,7 +102,7 @@ class ViewItemDelegate(QtGui.QStyledItemDelegate):
         :type view: :class:`sgkt.platform.qt.QtGui.QAbstractItemView`
         """
 
-        super(ViewItemDelegate, self).__init__(view)
+        super().__init__(view)
 
         # Store the view widget to fall back on for older versions of Qt, where the QStyleOption does not
         # have a widget or styleObject property
@@ -1089,7 +1084,7 @@ class ViewItemDelegate(QtGui.QStyledItemDelegate):
             -self.item_padding.bottom,
         )
 
-        super(ViewItemDelegate, self).initStyleOption(option, index)
+        super().initStyleOption(option, index)
 
     def createEditor(self, parent, option, index):
         """
@@ -1179,9 +1174,7 @@ class ViewItemDelegate(QtGui.QStyledItemDelegate):
 
             # Fall through to allow the base implementation to perform any other mouse move event handling
 
-        return super(ViewItemDelegate, self).editorEvent(
-            event, model, view_option, index
-        )
+        return super().editorEvent(event, model, view_option, index)
 
     def sizeHint(self, option, index):
         """
@@ -2446,7 +2439,7 @@ class ViewItemDelegate(QtGui.QStyledItemDelegate):
                 # Elide the title when the option and rect are provided, and there is text overflow.
                 _, elided_title = self._get_elided_text(option, target_width, title)
                 elided = title != elided_title
-                title = sgutils.ensure_str(elided_title)
+                title = elided_title
 
             title_html = '<td align="left width="100%"">{text}</td>'.format(text=title)
 
@@ -2458,7 +2451,7 @@ class ViewItemDelegate(QtGui.QStyledItemDelegate):
                     option, target_width, subtitle
                 )
                 elided = subtitle != elided_subtitle
-                subtitle = sgutils.ensure_str(elided_subtitle)
+                subtitle = elided_subtitle
 
             subtitle_html = '<td align="right" width="100%">{text}</td>'.format(
                 text=subtitle
@@ -2518,8 +2511,8 @@ class ViewItemDelegate(QtGui.QStyledItemDelegate):
                         option, subtitle_width, subtitle
                     )
                     elided = title != elided_title or subtitle != elided_subtitle
-                    title = sgutils.ensure_str(elided_title)
-                    subtitle = sgutils.ensure_str(elided_subtitle)
+                    title = elided_title
+                    subtitle = elided_subtitle
 
             title_html = '<td align="left" {width}>{text}</td>'.format(
                 width=title_width_str, text=title
@@ -3358,7 +3351,6 @@ class ViewItemDelegate(QtGui.QStyledItemDelegate):
             html_lines = html_lines[:-1]
 
         # Return a single string, lines are separated by HTML line break tags.
-        html_lines = [sgutils.ensure_str(line) for line in html_lines]
         formatted_str = "".join(html_lines)
         return (formatted_str, elided)
 
