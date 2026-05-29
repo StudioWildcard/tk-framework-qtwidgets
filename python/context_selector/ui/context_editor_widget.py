@@ -264,20 +264,20 @@ class Ui_ContextWidget(object):
     # setupUi
 
     def retranslateUi(self, ContextWidget):
-        ContextWidget.setWindowTitle(QtGui.QApplication.translate("ContextWidget", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("ContextWidget", "Task and Entity Link to apply to the selected item:", None, QtGui.QApplication.UnicodeUTF8))
-        self.task_label.setText(QtGui.QApplication.translate("ContextWidget", "Task: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.task_display.setText(QtGui.QApplication.translate("ContextWidget", "Loading...", None, QtGui.QApplication.UnicodeUTF8))
-        self.task_search_btn.setToolTip(QtGui.QApplication.translate("ContextWidget", "<html><head/><body><p>Toggle this button to allow searching for a Task to associate with the selected item.</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.task_search_btn.setText(QtGui.QApplication.translate("ContextWidget", "...", None, QtGui.QApplication.UnicodeUTF8))
-        self.status_label.setText(QtGui.QApplication.translate("ContextWidget", "Task status: ", None, QtGui.QApplication.UnicodeUTF8))
-        #self.status_display.setText(QtGui.QApplication.translate("ContextWidget", "Loading...", None, QtGui.QApplication.UnicodeUTF8))
-        self.link_label.setText(QtGui.QApplication.translate("ContextWidget", "Link: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.link_display.setText(QtGui.QApplication.translate("ContextWidget", "Loading...", None, QtGui.QApplication.UnicodeUTF8))
-        self.link_search_btn.setToolTip(QtGui.QApplication.translate("ContextWidget", "<html><head/><body><p>Toggle this button to allow searching for an entity to link to the selected item.</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.link_search_btn.setText(QtGui.QApplication.translate("ContextWidget", "...", None, QtGui.QApplication.UnicodeUTF8))
-        self.publish_name_label.setText(QtGui.QApplication.translate("ContextWidget", "Version name: ", None, QtGui.QApplication.UnicodeUTF8))
-        self.publish_token_label.setText(QtGui.QApplication.translate("ContextWidget", "Version token: ", None, QtGui.QApplication.UnicodeUTF8))
+        ContextWidget.setWindowTitle(QtGui.QApplication.translate("ContextWidget", "Form", None))
+        self.label.setText(QtGui.QApplication.translate("ContextWidget", "Task and Entity Link to apply to the selected item:", None))
+        self.task_label.setText(QtGui.QApplication.translate("ContextWidget", "Task: ", None))
+        self.task_display.setText(QtGui.QApplication.translate("ContextWidget", "Loading...", None))
+        self.task_search_btn.setToolTip(QtGui.QApplication.translate("ContextWidget", "<html><head/><body><p>Toggle this button to allow searching for a Task to associate with the selected item.</p></body></html>", None))
+        self.task_search_btn.setText(QtGui.QApplication.translate("ContextWidget", "...", None))
+        self.status_label.setText(QtGui.QApplication.translate("ContextWidget", "Task status: ", None))
+        #self.status_display.setText(QtGui.QApplication.translate("ContextWidget", "Loading...", None))
+        self.link_label.setText(QtGui.QApplication.translate("ContextWidget", "Link: ", None))
+        self.link_display.setText(QtGui.QApplication.translate("ContextWidget", "Loading...", None))
+        self.link_search_btn.setToolTip(QtGui.QApplication.translate("ContextWidget", "<html><head/><body><p>Toggle this button to allow searching for an entity to link to the selected item.</p></body></html>", None))
+        self.link_search_btn.setText(QtGui.QApplication.translate("ContextWidget", "...", None))
+        self.publish_name_label.setText(QtGui.QApplication.translate("ContextWidget", "Version name: ", None))
+        self.publish_token_label.setText(QtGui.QApplication.translate("ContextWidget", "Version token: ", None))
 
 from ..qtwidgets import GlobalSearchWidget
 from . import resources_rc
